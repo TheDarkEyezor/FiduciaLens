@@ -1,0 +1,388 @@
+#pragma version 8
+txn ApplicationID
+int 0
+==
+bnz main_l20
+txn OnCompletion
+int OptIn
+==
+bnz main_l19
+txn OnCompletion
+int CloseOut
+==
+bnz main_l18
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l17
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l16
+txna ApplicationArgs 0
+byte "deposit"
+==
+bnz main_l15
+txna ApplicationArgs 0
+byte "borrow"
+==
+bnz main_l14
+txna ApplicationArgs 0
+byte "repay"
+==
+bnz main_l13
+txna ApplicationArgs 0
+byte "withdraw"
+==
+bnz main_l12
+txna ApplicationArgs 0
+byte "liquidate"
+==
+bnz main_l11
+err
+main_l11:
+callsub liquidate_4
+int 1
+return
+main_l12:
+callsub withdraw_3
+int 1
+return
+main_l13:
+callsub repay_2
+int 1
+return
+main_l14:
+callsub borrow_1
+int 1
+return
+main_l15:
+callsub deposit_0
+int 1
+return
+main_l16:
+int 0
+return
+main_l17:
+int 0
+return
+main_l18:
+int 1
+return
+main_l19:
+txn Sender
+byte "Collateral"
+int 0
+app_local_put
+txn Sender
+byte "Debt"
+int 0
+app_local_put
+txn Sender
+byte "CreditScore"
+int 0
+app_local_put
+int 1
+return
+main_l20:
+byte "TotalCollateral"
+int 0
+app_global_put
+byte "TotalBorrow"
+int 0
+app_global_put
+byte "MaxLTV"
+int 50
+app_global_put
+int 1
+return
+
+// deposit
+deposit_0:
+proto 0 0
+txn GroupIndex
+int 1
+-
+gtxns TypeEnum
+int pay
+==
+assert
+txn GroupIndex
+int 1
+-
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+byte "TotalCollateral"
+byte "TotalCollateral"
+app_global_get
+txn GroupIndex
+int 1
+-
+gtxns Amount
++
+app_global_put
+txn Sender
+byte "Collateral"
+txn Sender
+byte "Collateral"
+app_local_get
+txn GroupIndex
+int 1
+-
+gtxns Amount
++
+app_local_put
+retsub
+
+// borrow
+borrow_1:
+proto 0 0
+txna ApplicationArgs 1
+btoi
+int 0
+>
+assert
+txn Sender
+byte "Collateral"
+app_local_get
+int 0
+>
+assert
+txn Sender
+byte "Debt"
+app_local_get
+txna ApplicationArgs 1
+btoi
++
+txn Sender
+byte "Collateral"
+app_local_get
+txna ApplicationArgs 2
+btoi
+int 70
+>=
+bnz borrow_1_l4
+byte "MaxLTV"
+app_global_get
+borrow_1_l2:
+*
+int 100
+/
+<=
+assert
+txn NumAppArgs
+int 2
+>
+bz borrow_1_l5
+txn Sender
+byte "CreditScore"
+txna ApplicationArgs 2
+btoi
+app_local_put
+b borrow_1_l5
+borrow_1_l4:
+byte "MaxLTV"
+app_global_get
+int 10
++
+b borrow_1_l2
+borrow_1_l5:
+itxn_begin
+int pay
+itxn_field TypeEnum
+txn Sender
+itxn_field Receiver
+txna ApplicationArgs 1
+btoi
+itxn_field Amount
+itxn_submit
+byte "TotalBorrow"
+byte "TotalBorrow"
+app_global_get
+txna ApplicationArgs 1
+btoi
++
+app_global_put
+txn Sender
+byte "Debt"
+txn Sender
+byte "Debt"
+app_local_get
+txna ApplicationArgs 1
+btoi
++
+app_local_put
+retsub
+
+// repay
+repay_2:
+proto 0 0
+txn GroupIndex
+int 1
+-
+gtxns TypeEnum
+int pay
+==
+assert
+txn GroupIndex
+int 1
+-
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+txn GroupIndex
+int 1
+-
+gtxns Amount
+int 0
+>
+assert
+txn GroupIndex
+int 1
+-
+gtxns Amount
+txn Sender
+byte "Debt"
+app_local_get
+<=
+assert
+byte "TotalBorrow"
+byte "TotalBorrow"
+app_global_get
+txn GroupIndex
+int 1
+-
+gtxns Amount
+-
+app_global_put
+txn Sender
+byte "Debt"
+txn Sender
+byte "Debt"
+app_local_get
+txn GroupIndex
+int 1
+-
+gtxns Amount
+-
+app_local_put
+retsub
+
+// withdraw
+withdraw_3:
+proto 0 0
+txn Sender
+byte "Debt"
+app_local_get
+int 0
+==
+assert
+txna ApplicationArgs 1
+btoi
+int 0
+>
+assert
+txna ApplicationArgs 1
+btoi
+txn Sender
+byte "Collateral"
+app_local_get
+<=
+assert
+itxn_begin
+int pay
+itxn_field TypeEnum
+txn Sender
+itxn_field Receiver
+txna ApplicationArgs 1
+btoi
+itxn_field Amount
+itxn_submit
+byte "TotalCollateral"
+byte "TotalCollateral"
+app_global_get
+txna ApplicationArgs 1
+btoi
+-
+app_global_put
+txn Sender
+byte "Collateral"
+txn Sender
+byte "Collateral"
+app_local_get
+txna ApplicationArgs 1
+btoi
+-
+app_local_put
+retsub
+
+// liquidate
+liquidate_4:
+proto 0 0
+txna ApplicationArgs 1
+byte "Debt"
+app_local_get
+int 0
+>
+assert
+txna ApplicationArgs 1
+byte "Collateral"
+app_local_get
+int 0
+>
+assert
+txna ApplicationArgs 1
+byte "Debt"
+app_local_get
+int 100
+*
+txna ApplicationArgs 1
+byte "Collateral"
+app_local_get
+/
+byte "MaxLTV"
+app_global_get
+>
+assert
+itxn_begin
+int pay
+itxn_field TypeEnum
+txn Sender
+itxn_field Receiver
+txna ApplicationArgs 1
+byte "Collateral"
+app_local_get
+int 10
+/
+itxn_field Amount
+itxn_submit
+byte "TotalCollateral"
+byte "TotalCollateral"
+app_global_get
+txna ApplicationArgs 1
+byte "Collateral"
+app_local_get
+int 10
+/
+-
+app_global_put
+byte "TotalBorrow"
+byte "TotalBorrow"
+app_global_get
+txna ApplicationArgs 1
+byte "Debt"
+app_local_get
+-
+app_global_put
+txna ApplicationArgs 1
+byte "Collateral"
+int 0
+app_local_put
+txna ApplicationArgs 1
+byte "Debt"
+int 0
+app_local_put
+retsub

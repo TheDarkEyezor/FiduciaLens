@@ -1,0 +1,80 @@
+{
+  "generated_at": "2025-10-19T11:13:14.489349",
+  "total_documents": 8,
+  "valid_count": 6,
+  "invalid_count": 2,
+  "documents": [
+    {
+      "document_type": "passport",
+      "content": "\nPASSPORT\nUnited States of America\nSurname: DOE\nGiven Names: JOHN MICHAEL\nNationality: USA\nDate of Birth: 15 JAN 1990\nSex: M\nPlace of Birth: NEW YORK, NY\nDate of Issue: 01 JAN 2020\nDate of Expiration: 01 JAN 2030\nPassport No: 123456789\n",
+      "document_hash": "48bdfe634be8a999560f97abbe1c5c3602c04ab67ae635abc82e95a79327e752",
+      "issuer_id": "DEMO_GOVT",
+      "issuer_signature": "5592cb5b2e9b967b123a4c5e5703b497fa515dafe6ad57fbcf6f6fcf2deb990e",
+      "valid": true,
+      "created_at": "2025-10-19T11:13:14.489175"
+    },
+    {
+      "document_type": "drivers_license",
+      "content": "\nDRIVER LICENSE\nState: California\nLicense No: D1234567\nName: JANE SARAH SMITH\nDOB: 03/15/1985\nSex: F\nHeight: 5-06\nEyes: BRN\nAddress: 123 Main St, Los Angeles, CA 90001\nIssue Date: 01/15/2023\nExpiration: 01/15/2028\nClass: C\n",
+      "document_hash": "3f70b659f0f3e6542bbd6c1e41dfc34e33c5a2259b4a3b3e83c663d39d0e81ba",
+      "issuer_id": "US_DMV",
+      "issuer_signature": "97a2469886c44d2de7c8fbdf29f9cb0c395bc8008a945bc44a7a03d0adec17da",
+      "valid": true,
+      "created_at": "2025-10-19T11:13:14.489203"
+    },
+    {
+      "document_type": "bank_statement",
+      "content": "\nCHASE BANK\nAccount Statement - December 2024\n\nAccount Holder: Robert Johnson\nAccount Number: ****5678\nStatement Period: 12/01/2024 - 12/31/2024\n\nBeginning Balance: $15,234.56\nTotal Deposits: $8,500.00\nTotal Withdrawals: $3,200.00\nEnding Balance: $20,534.56\n\nAverage Balance: $18,000.00\nAccount Type: Checking\nAccount Status: Active - Good Standing\n",
+      "document_hash": "97fd1084d9ab86ff714a7ae09e0de2f0f4081c5f90181d23308d242945eb2966",
+      "issuer_id": "CHASE_BANK",
+      "issuer_signature": "b83fec73a0b32d44c4698239d8477403a184ed9fd68c7f099716fed74cc24be6",
+      "valid": true,
+      "created_at": "2025-10-19T11:13:14.489211"
+    },
+    {
+      "document_type": "utility_bill",
+      "content": "\nPACIFIC POWER & ELECTRIC\nBill Statement - January 2025\n\nService Address: 456 Oak Avenue, San Francisco, CA 94102\nAccount Number: 9876543210\nCustomer Name: Maria Garcia\n\nCurrent Charges: $125.45\nDue Date: 02/15/2025\nService Period: 12/15/2024 - 01/15/2025\n\nUsage: 350 kWh\nAccount Status: Current\n",
+      "document_hash": "debf781b019ea5e46bb24a7dacf6a8e37be640800d30a36d4e646524a441108d",
+      "issuer_id": "UTIL_COMPANY",
+      "issuer_signature": "8af720e50ca1b7712dda44550344fe5a0a9c26e5ee7bb9641172b3fe7a57958e",
+      "valid": true,
+      "created_at": "2025-10-19T11:13:14.489216"
+    },
+    {
+      "document_type": "employment_letter",
+      "content": "\nTECHCORP INC.\nEmployment Verification Letter\n\nDate: January 10, 2025\n\nTo Whom It May Concern,\n\nThis letter confirms that Michael Chen has been employed with TechCorp Inc. \nas a Senior Software Engineer since March 15, 2020.\n\nCurrent Annual Salary: $145,000\nEmployment Status: Full-time, Active\nDepartment: Engineering\nDirect Supervisor: Jane Williams, VP Engineering\n\nHR Contact: hr@techcorp.com | (555) 123-4567\n\nSincerely,\nHuman Resources Department\n",
+      "document_hash": "05e6792f2688a942d4ab2d1a3bfb345248f56240bf64e318581382231a82f434",
+      "issuer_id": "DEMO_BANK",
+      "issuer_signature": "bdbd855255e029fb65a14942de3ff2a0ec65c71c6dbb4ae9a1b2536cd64b5aac",
+      "valid": true,
+      "created_at": "2025-10-19T11:13:14.489222"
+    },
+    {
+      "document_type": "tax_return",
+      "content": "\nU.S. Individual Income Tax Return\nForm 1040 - 2023\n\nTaxpayer: David Anderson\nSSN: ***-**-1234\nFiling Status: Single\n\nTotal Income: $95,000\nAdjusted Gross Income: $90,000\nTotal Tax: $15,234\nFederal Tax Withheld: $16,000\nRefund: $766\n\nIRS Processing Date: 04/15/2024\nReturn Status: Accepted\n",
+      "document_hash": "3fd32587fd6e1abe55481c98a6375baf9e6a012a4afee8a7ef39567cb77f2382",
+      "issuer_id": "IRS",
+      "issuer_signature": "77f1242156e5bc47fc51ea6ea55941e667f3a9423ba433f5d5c650172093259c",
+      "valid": true,
+      "created_at": "2025-10-19T11:13:14.489227"
+    },
+    {
+      "document_type": "passport",
+      "content": "\nPASSPORT\nDemocratic People's Republic of Fakeland\nSurname: FRAUDSTER\nGiven Names: SCAM ARTIST\nNationality: FAKE\nDate of Birth: 01 JAN 1900\nPassport No: FAKE123456\n",
+      "document_hash": "9ab94140ed79ba7ea0caf72cab9f1c03d75d6f45e52436e682ce7b524616f469",
+      "issuer_id": "DEMO_GOVT",
+      "issuer_signature": "INVALID_2c42625e1bad480dcc51c6dd70145aa0b99cb8079f7ed345ee97255c6123d9a1",
+      "valid": false,
+      "created_at": "2025-10-19T11:13:14.489231"
+    },
+    {
+      "document_type": "bank_statement",
+      "content": "\nTOTALLY LEGIT BANK\nAccount Statement\n\nAccount Holder: Rich Person\nBalance: $999,999,999.99\nStatus: Super Excellent\n",
+      "document_hash": "5c1056ef7a7e5f06a4701f126fddfabc7e190991a78de61d3fa56ff854b99ab6",
+      "issuer_id": "CHASE_BANK",
+      "issuer_signature": "INVALID_2c42625e1bad480dcc51c6dd70145aa0b99cb8079f7ed345ee97255c6123d9a1",
+      "valid": false,
+      "created_at": "2025-10-19T11:13:14.489234"
+    }
+  ]
+}

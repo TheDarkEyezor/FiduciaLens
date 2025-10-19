@@ -1,0 +1,6 @@
+# Wallet credentials - NEVER COMMIT!
+wallet.txt
+*.mnemonic
+
+# Application deployment info
+app_id.txt
